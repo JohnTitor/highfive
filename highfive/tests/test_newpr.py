@@ -1181,7 +1181,7 @@ class TestChooseReviewer(TestNewPR):
         assert set([()]) == mentions
 
     def test_with_files(self):
-        """Test choosing a reviewer when a file os changed."""
+        """Test choosing a reviewer when a file is changed."""
         self.handler = HighfiveHandlerMock(
             Payload({}), repo_config=self.fakes['config']['individual_files']
         ).handler
