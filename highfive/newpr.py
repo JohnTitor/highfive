@@ -334,13 +334,15 @@ class HighfiveHandler(object):
                     full_dir = "/".join(parts)
 
                     # A few heuristics to get better reviewers
-                    if cur_dir.startswith('src/librustc'):
-                        cur_dir = 'src/librustc'
+                    if cur_dir.startswith('compiler/'):
+                        cur_dir = 'compiler'
                     if cur_dir == 'src/test':
                         cur_dir = None
                     if len(full_dir) > 0:
                         for entry in mentions:
-                            if full_dir.startswith(entry):
+                            entry_parts = entry.split("/")
+                            if full_dir.startswith(entry) \
+                                    and parts[len(entry_parts) - 1] == entry_parts[-1]:
                                 to_mention.add(entry)
                             elif entry.endswith('.rs') and full_dir.endswith(entry):
                                 to_mention.add(entry)
